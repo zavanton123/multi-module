@@ -1,9 +1,12 @@
 package ru.zavanton.chatbot.sales.di
 
+import dagger.Binds
 import dagger.Component
 import dagger.Module
 import dagger.Provides
 import ru.zavanton.chatbot.app.di.ApplicationComponent
+import ru.zavanton.chatbot.sales.business.ISalesInteractor
+import ru.zavanton.chatbot.sales.business.SalesInteractor
 import ru.zavanton.chatbot.sales.ui.SalesActivity
 import ru.zavanton.chatbot.sales.ui.SalesActivityPresenter
 import ru.zavanton.chatbot.utils.TextUtils
@@ -28,11 +31,20 @@ interface SalesComponent {
 }
 
 @Module
-class SalesModule {
+interface SalesModule {
+
+    companion object {
+        @SalesActivityScope
+        @Provides
+        fun provideSalesActivityPresenter(
+            textUtils: TextUtils,
+            interactor: ISalesInteractor
+        ): SalesActivityPresenter {
+            return SalesActivityPresenter(textUtils, interactor)
+        }
+    }
 
     @SalesActivityScope
-    @Provides
-    fun provideSalesActivityPresenter(textUtils: TextUtils): SalesActivityPresenter {
-        return SalesActivityPresenter(textUtils)
-    }
+    @Binds
+    fun provideInteractor(impl: SalesInteractor): ISalesInteractor
 }
