@@ -1,6 +1,7 @@
 package ru.zavanton.chatbot.app.di
 
 import android.content.Context
+import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -16,11 +17,19 @@ annotation class ApplicationContext
 @Singleton
 @Component(
     modules = [
-        ApplicationModule::class,
         UtilsModule::class
     ]
 )
 interface ApplicationComponent {
+
+    @Component.Builder
+    interface Builder {
+
+        @BindsInstance
+        fun applicationContext(@ApplicationContext context: Context): Builder
+
+        fun build(): ApplicationComponent
+    }
 
     fun inject(mainActivity: MainActivity)
 
@@ -30,16 +39,6 @@ interface ApplicationComponent {
     fun provideTextUtils(): TextUtils
 }
 
-@Module
-class ApplicationModule(private val context: Context) {
-
-    @Singleton
-    @Provides
-    @ApplicationContext
-    fun provideContext(): Context {
-        return context
-    }
-}
 
 @Module
 class UtilsModule {

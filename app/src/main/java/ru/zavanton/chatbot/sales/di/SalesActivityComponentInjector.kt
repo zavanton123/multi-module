@@ -11,7 +11,7 @@ object SalesActivityComponentInjector {
         if (salesActivityComponent == null) {
             salesActivityComponent = DaggerSalesActivityComponent
                 .builder()
-                .salesActivityContextModule(SalesActivityContextModule(context))
+                .salesActivityContext(context)
                 .applicationComponent(ApplicationComponentInjector.getComponent())
                 .build()
         }

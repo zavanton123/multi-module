@@ -9,7 +9,7 @@ object ApplicationComponentInjector {
     fun initComponent(context: Context) {
         applicationComponent = DaggerApplicationComponent
             .builder()
-            .applicationModule(ApplicationModule(context))
+            .applicationContext(context)
             .build()
     }
 

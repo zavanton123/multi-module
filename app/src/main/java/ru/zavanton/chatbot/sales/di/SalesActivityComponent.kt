@@ -30,11 +30,21 @@ annotation class SalesActivityContext
         ApplicationComponent::class
     ],
     modules = [
-        SalesActivityModule::class,
-        SalesActivityContextModule::class
+        SalesActivityModule::class
     ]
 )
 interface SalesActivityComponent {
+
+    @Component.Builder
+    interface Builder {
+
+        @BindsInstance
+        fun salesActivityContext(@SalesActivityContext context: Context): Builder
+
+        fun applicationComponent(applicationComponent: ApplicationComponent): Builder
+
+        fun build(): SalesActivityComponent
+    }
 
     fun inject(salesActivity: SalesActivity)
 
@@ -58,17 +68,6 @@ interface SalesActivityModule {
     @SalesActivityScope
     @Binds
     fun provideInteractor(impl: SalesInteractor): ISalesInteractor
-}
-
-@Module
-class SalesActivityContextModule(private val context: Context) {
-
-    @SalesActivityScope
-    @Provides
-    @SalesActivityContext
-    fun provideActivityContext(): Context {
-        return context
-    }
 }
 
 @SalesFragmentScope
