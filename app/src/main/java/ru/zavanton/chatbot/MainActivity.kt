@@ -8,12 +8,16 @@ import androidx.appcompat.app.AppCompatActivity
 import ru.zavanton.chatbot.app.App
 import ru.zavanton.chatbot.chatbot.ChatbotActivity
 import ru.zavanton.chatbot.sales.SalesActivity
+import ru.zavanton.chatbot.utils.TextUtils
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var appContext: Context
+
+    @Inject
+    lateinit var textUtils: TextUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (this.application as App).applicationComponent
@@ -22,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.a_main)
 
         Log.d("zavanton", "zavanton - appContext: $appContext")
+        Log.d("zavanton", "zavanton - application name: ${textUtils.getString(R.string.app_name)}")
 
         val salesButton = findViewById<Button>(R.id.btnSales)
         val chatbotButton = findViewById<Button>(R.id.btnChatbot)
