@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import ru.zavanton.chatbot.R
-import ru.zavanton.chatbot.sales.di.SalesComponentInjector
+import ru.zavanton.chatbot.sales.di.SalesActivityComponentInjector
 import ru.zavanton.chatbot.sales.ui.fragment.SalesFragment
 import javax.inject.Inject
 
@@ -22,7 +22,7 @@ class SalesActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        SalesComponentInjector
+        SalesActivityComponentInjector
             .getComponent()
             .inject(this)
 

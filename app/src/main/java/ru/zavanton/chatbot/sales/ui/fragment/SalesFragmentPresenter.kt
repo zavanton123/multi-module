@@ -3,8 +3,9 @@ package ru.zavanton.chatbot.sales.ui.fragment
 import android.util.Log
 import ru.zavanton.chatbot.R
 import ru.zavanton.chatbot.utils.TextUtils
+import javax.inject.Inject
 
-class SalesFragmentPresenter constructor(
+class SalesFragmentPresenter @Inject constructor(
     private val textUtils: TextUtils
 ) {
 

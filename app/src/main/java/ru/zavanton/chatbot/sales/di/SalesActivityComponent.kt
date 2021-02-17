@@ -1,14 +1,12 @@
 package ru.zavanton.chatbot.sales.di
 
-import dagger.Binds
-import dagger.Component
-import dagger.Module
-import dagger.Provides
+import dagger.*
 import ru.zavanton.chatbot.app.di.ApplicationComponent
 import ru.zavanton.chatbot.sales.business.ISalesInteractor
 import ru.zavanton.chatbot.sales.business.SalesInteractor
 import ru.zavanton.chatbot.sales.ui.activity.SalesActivity
 import ru.zavanton.chatbot.sales.ui.activity.SalesActivityPresenter
+import ru.zavanton.chatbot.sales.ui.fragment.SalesFragment
 import ru.zavanton.chatbot.utils.TextUtils
 import javax.inject.Scope
 
@@ -16,27 +14,33 @@ import javax.inject.Scope
 @Retention(AnnotationRetention.RUNTIME)
 annotation class SalesActivityScope
 
+@Scope
+@Retention
+annotation class SalesFragmentScope
+
 @SalesActivityScope
 @Component(
     dependencies = [
         ApplicationComponent::class
     ],
     modules = [
-        SalesModule::class
+        SalesActivityModule::class
     ]
 )
-interface SalesComponent {
+interface SalesActivityComponent {
 
     fun inject(salesActivity: SalesActivity)
+
+    fun salesFragmentComponent(): SalesFragmentComponent
 }
 
 @Module
-interface SalesModule {
+interface SalesActivityModule {
 
     companion object {
         @SalesActivityScope
         @Provides
-        fun provideSalesActivityPresenter(
+        fun providePresenter(
             textUtils: TextUtils,
             interactor: ISalesInteractor
         ): SalesActivityPresenter {
@@ -47,4 +51,11 @@ interface SalesModule {
     @SalesActivityScope
     @Binds
     fun provideInteractor(impl: SalesInteractor): ISalesInteractor
+}
+
+@SalesFragmentScope
+@Subcomponent
+interface SalesFragmentComponent {
+
+    fun inject(salesFragment: SalesFragment)
 }
