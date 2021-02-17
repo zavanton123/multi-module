@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import ru.zavanton.chatbot.app.App
+import ru.zavanton.chatbot.app.di.ApplicationComponentInjector
 import ru.zavanton.chatbot.chatbot.ChatbotActivity
 import ru.zavanton.chatbot.sales.ui.SalesActivity
 import ru.zavanton.chatbot.utils.TextUtils
@@ -20,8 +20,10 @@ class MainActivity : AppCompatActivity() {
     lateinit var textUtils: TextUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (this.application as App).applicationComponent
-            ?.inject(this)
+        ApplicationComponentInjector
+            .getComponent()
+            .inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.a_main)
 
