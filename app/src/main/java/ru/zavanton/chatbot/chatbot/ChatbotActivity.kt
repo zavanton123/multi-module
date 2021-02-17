@@ -1,9 +1,10 @@
-package ru.zavanton.chatbot
+package ru.zavanton.chatbot.chatbot
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import ru.zavanton.chatbot.R
 
 class ChatbotActivity : AppCompatActivity() {
 
