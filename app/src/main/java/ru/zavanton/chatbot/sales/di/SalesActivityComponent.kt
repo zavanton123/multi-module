@@ -2,7 +2,6 @@ package ru.zavanton.chatbot.sales.di
 
 import android.content.Context
 import dagger.*
-import ru.zavanton.chatbot.app.di.ApplicationComponent
 import ru.zavanton.chatbot.app.di.ApplicationDependencies
 import ru.zavanton.chatbot.sales.business.ISalesInteractor
 import ru.zavanton.chatbot.sales.business.SalesInteractor
@@ -31,7 +30,7 @@ annotation class SalesActivityContext
         ApplicationDependencies::class
     ],
     modules = [
-        SalesActivityModule::class
+        SalesActivityPresenterModule::class
     ]
 )
 interface SalesActivityComponent {
@@ -47,33 +46,40 @@ interface SalesActivityComponent {
         fun build(): SalesActivityComponent
     }
 
-    fun inject(salesActivity: SalesActivity)
-
+    // provision method
     fun salesFragmentComponent(): SalesFragmentComponent
+
+    // members-injection method
+    fun inject(salesActivity: SalesActivity)
+}
+
+// demo: transitively include other modules
+@Module(includes = [SalesActivityInteractorModule::class])
+class SalesActivityPresenterModule {
+
+    @SalesActivityScope
+    @Provides
+    fun providesPresenter(
+        textUtils: TextUtils,
+        interactor: ISalesInteractor
+    ): SalesActivityPresenter {
+        return SalesActivityPresenter(textUtils, interactor)
+    }
 }
 
 @Module
-interface SalesActivityModule {
-
-    companion object {
-        @SalesActivityScope
-        @Provides
-        fun providePresenter(
-            textUtils: TextUtils,
-            interactor: ISalesInteractor
-        ): SalesActivityPresenter {
-            return SalesActivityPresenter(textUtils, interactor)
-        }
-    }
+interface SalesActivityInteractorModule {
 
     @SalesActivityScope
     @Binds
-    fun provideInteractor(impl: SalesInteractor): ISalesInteractor
+    fun bindsInteractor(impl: SalesInteractor): ISalesInteractor
 }
+
 
 @SalesFragmentScope
 @Subcomponent
 interface SalesFragmentComponent {
 
+    // members-injection method
     fun inject(salesFragment: SalesFragment)
 }

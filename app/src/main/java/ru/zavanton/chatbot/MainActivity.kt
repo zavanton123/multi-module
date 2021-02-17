@@ -9,7 +9,6 @@ import ru.zavanton.chatbot.app.di.ApplicationComponentInjector
 import ru.zavanton.chatbot.app.di.ApplicationContext
 import ru.zavanton.chatbot.chatbot.ChatbotActivity
 import ru.zavanton.chatbot.sales.ui.activity.SalesActivity
-import ru.zavanton.chatbot.utils.TextUtils
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -17,9 +16,6 @@ class MainActivity : AppCompatActivity() {
     @Inject
     @ApplicationContext
     lateinit var appContext: Context
-
-    @Inject
-    lateinit var textUtils: TextUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ApplicationComponentInjector
@@ -29,8 +25,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.a_main)
 
-        Log.d("zavanton", "zavanton - appContext: $appContext")
-        Log.d("zavanton", "zavanton - application name: ${textUtils.getString(R.string.app_name)}")
+        // get some dependency directly from component's provision method
+        val textUtils = ApplicationComponentInjector.getComponent()
+            .provideTextUtils()
+
+        Log.d("zavanton", "zavanton - main appcontext: $appContext")
+        Log.d("zavanton", "zavanton - main name: ${textUtils.getString(R.string.app_name)}")
 
         val salesButton = findViewById<Button>(R.id.btnSales)
         val chatbotButton = findViewById<Button>(R.id.btnChatbot)

@@ -16,9 +16,11 @@ annotation class ApplicationContext
 
 interface ApplicationDependencies {
 
+    // provision method
     @ApplicationContext
     fun provideApplicationContext(): Context
 
+    // provision method
     fun provideTextUtils(): TextUtils
 }
 
@@ -39,6 +41,7 @@ interface ApplicationComponent : ApplicationDependencies {
         fun build(): ApplicationComponent
     }
 
+    // members-injection method (vs provision method)
     fun inject(mainActivity: MainActivity)
 }
 
