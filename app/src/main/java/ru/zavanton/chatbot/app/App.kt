@@ -17,9 +17,5 @@ class App : Application() {
 
         ApplicationComponentInjector.initComponent(this)
 
-        salesComponent = DaggerSalesComponent
-            .builder()
-            .applicationComponent(ApplicationComponentInjector.getComponent())
-            .build()
     }
 }

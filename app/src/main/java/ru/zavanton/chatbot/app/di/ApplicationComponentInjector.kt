@@ -4,7 +4,7 @@ import android.content.Context
 
 object ApplicationComponentInjector {
 
-    var applicationComponent: ApplicationComponent? = null
+    lateinit var applicationComponent: ApplicationComponent
 
     fun initComponent(context: Context) {
         applicationComponent = DaggerApplicationComponent
@@ -14,9 +14,6 @@ object ApplicationComponentInjector {
     }
 
     fun getComponent(): ApplicationComponent {
-        if (applicationComponent == null) {
-            throw IllegalStateException("ApplicationComponent must be initialized")
-        }
-        return applicationComponent!!
+        return applicationComponent
     }
 }

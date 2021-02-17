@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import ru.zavanton.chatbot.R
-import ru.zavanton.chatbot.app.App
+import ru.zavanton.chatbot.sales.di.SalesComponentInjector
 import javax.inject.Inject
 
 class SalesActivity : AppCompatActivity() {
@@ -21,8 +21,9 @@ class SalesActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (this.application as App).salesComponent
-            ?.inject(this)
+        SalesComponentInjector
+            .getComponent()
+            .inject(this)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.a_sales)
