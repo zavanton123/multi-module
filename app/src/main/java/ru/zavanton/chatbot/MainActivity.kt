@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import ru.zavanton.chatbot.app.di.ApplicationComponentInjector
+import ru.zavanton.chatbot.app.di.ApplicationContext
 import ru.zavanton.chatbot.chatbot.ChatbotActivity
 import ru.zavanton.chatbot.sales.ui.activity.SalesActivity
 import ru.zavanton.chatbot.utils.TextUtils
@@ -14,6 +15,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject
+    @ApplicationContext
     lateinit var appContext: Context
 
     @Inject

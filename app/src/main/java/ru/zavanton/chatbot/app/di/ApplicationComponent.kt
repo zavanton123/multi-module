@@ -6,7 +6,12 @@ import dagger.Module
 import dagger.Provides
 import ru.zavanton.chatbot.MainActivity
 import ru.zavanton.chatbot.utils.TextUtils
+import javax.inject.Qualifier
 import javax.inject.Singleton
+
+@Qualifier
+@Retention
+annotation class ApplicationContext
 
 @Singleton
 @Component(
@@ -27,6 +32,7 @@ class ApplicationModule(private val context: Context) {
 
     @Singleton
     @Provides
+    @ApplicationContext
     fun provideContext(): Context {
         return context
     }
@@ -37,7 +43,7 @@ class UtilsModule {
 
     @Singleton
     @Provides
-    fun provideTextUtils(context: Context): TextUtils {
+    fun provideTextUtils(@ApplicationContext context: Context): TextUtils {
         return TextUtils(context)
     }
 }
