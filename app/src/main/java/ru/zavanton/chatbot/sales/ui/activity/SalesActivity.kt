@@ -23,7 +23,7 @@ class SalesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         SalesActivityComponentInjector
-            .getComponent()
+            .initComponent(this)
             .inject(this)
 
         super.onCreate(savedInstanceState)

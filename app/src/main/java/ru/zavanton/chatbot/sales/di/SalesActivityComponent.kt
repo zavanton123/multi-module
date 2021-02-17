@@ -1,5 +1,6 @@
 package ru.zavanton.chatbot.sales.di
 
+import android.content.Context
 import dagger.*
 import ru.zavanton.chatbot.app.di.ApplicationComponent
 import ru.zavanton.chatbot.sales.business.ISalesInteractor
@@ -8,6 +9,7 @@ import ru.zavanton.chatbot.sales.ui.activity.SalesActivity
 import ru.zavanton.chatbot.sales.ui.activity.SalesActivityPresenter
 import ru.zavanton.chatbot.sales.ui.fragment.SalesFragment
 import ru.zavanton.chatbot.utils.TextUtils
+import javax.inject.Qualifier
 import javax.inject.Scope
 
 @Scope
@@ -18,13 +20,18 @@ annotation class SalesActivityScope
 @Retention
 annotation class SalesFragmentScope
 
+@Qualifier
+@Retention
+annotation class SalesActivityContext
+
 @SalesActivityScope
 @Component(
     dependencies = [
         ApplicationComponent::class
     ],
     modules = [
-        SalesActivityModule::class
+        SalesActivityModule::class,
+        SalesActivityContextModule::class
     ]
 )
 interface SalesActivityComponent {
@@ -51,6 +58,17 @@ interface SalesActivityModule {
     @SalesActivityScope
     @Binds
     fun provideInteractor(impl: SalesInteractor): ISalesInteractor
+}
+
+@Module
+class SalesActivityContextModule(private val context: Context) {
+
+    @SalesActivityScope
+    @Provides
+    @SalesActivityContext
+    fun provideActivityContext(): Context {
+        return context
+    }
 }
 
 @SalesFragmentScope

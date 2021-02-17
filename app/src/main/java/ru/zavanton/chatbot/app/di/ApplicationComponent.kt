@@ -24,6 +24,9 @@ interface ApplicationComponent {
 
     fun inject(mainActivity: MainActivity)
 
+    @ApplicationContext
+    fun provideApplicationContext(): Context
+
     fun provideTextUtils(): TextUtils
 }
 
