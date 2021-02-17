@@ -3,8 +3,8 @@ package ru.zavanton.chatbot
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import ru.zavanton.chatbot.chatbot.ChatbotActivity
-import ru.zavanton.chatbot.sales.SalesActivity
+import ru.zavanton.chatbot.chatbot.activity.ChatbotActivity
+import ru.zavanton.chatbot.sales.activity.SalesActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
