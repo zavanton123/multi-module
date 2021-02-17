@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.a_main)
 
         val salesButton = findViewById<Button>(R.id.btnSales)
         val chatbotButton = findViewById<Button>(R.id.btnChatbot)
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         chatbotButton.setOnClickListener {
-
+            ChatbotActivity.start(this)
         }
     }
 }
