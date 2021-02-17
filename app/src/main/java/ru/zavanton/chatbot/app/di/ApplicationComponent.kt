@@ -5,7 +5,10 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
 import dagger.Provides
-import ru.zavanton.chatbot.MainActivity
+import dagger.android.AndroidInjectionModule
+import ru.zavanton.chatbot.app.App
+import ru.zavanton.chatbot.main.MainActivityModule
+import ru.zavanton.chatbot.sales.di.SalesActivityModule
 import ru.zavanton.chatbot.utils.TextUtils
 import javax.inject.Qualifier
 import javax.inject.Singleton
@@ -14,21 +17,15 @@ import javax.inject.Singleton
 @Retention
 annotation class ApplicationContext
 
-interface ApplicationDependencies {
-
-    @ApplicationContext
-    fun provideApplicationContext(): Context
-
-    fun provideTextUtils(): TextUtils
-}
-
 @Singleton
 @Component(
     modules = [
+        AndroidInjectionModule::class,
+        Modules::class,
         UtilsModule::class
     ]
 )
-interface ApplicationComponent : ApplicationDependencies {
+interface ApplicationComponent {
 
     @Component.Builder
     interface Builder {
@@ -39,8 +36,16 @@ interface ApplicationComponent : ApplicationDependencies {
         fun build(): ApplicationComponent
     }
 
-    fun inject(mainActivity: MainActivity)
+    fun inject(app: App)
 }
+
+@Module(
+    includes = [
+        MainActivityModule::class,
+        SalesActivityModule::class
+    ]
+)
+interface Modules
 
 
 @Module
@@ -52,4 +57,3 @@ class UtilsModule {
         return TextUtils(context)
     }
 }
-

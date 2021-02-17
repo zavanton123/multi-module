@@ -1,18 +1,22 @@
-package ru.zavanton.chatbot
+package ru.zavanton.chatbot.main
 
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import ru.zavanton.chatbot.app.di.ApplicationComponentInjector
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import ru.zavanton.chatbot.R
 import ru.zavanton.chatbot.app.di.ApplicationContext
 import ru.zavanton.chatbot.chatbot.ChatbotActivity
 import ru.zavanton.chatbot.sales.ui.activity.SalesActivity
 import ru.zavanton.chatbot.utils.TextUtils
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
     @Inject
     @ApplicationContext
@@ -21,10 +25,11 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var textUtils: TextUtils
 
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        ApplicationComponentInjector
-            .getComponent()
-            .inject(this)
+        AndroidInjection.inject(this)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.a_main)
@@ -43,4 +48,6 @@ class MainActivity : AppCompatActivity() {
             ChatbotActivity.start(this)
         }
     }
+
+    override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
 }
