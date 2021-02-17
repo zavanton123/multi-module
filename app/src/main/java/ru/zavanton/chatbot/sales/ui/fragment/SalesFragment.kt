@@ -35,7 +35,9 @@ class SalesFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         SalesActivityComponentInjector
             .getComponent()
-            .salesFragmentComponent()
+            .salesFragmentComponentBuilder()
+            .secretKey("5343-fqlwrj-iovxl2-1l32kj")
+            .build()
             .inject(this)
 
         super.onCreate(savedInstanceState)

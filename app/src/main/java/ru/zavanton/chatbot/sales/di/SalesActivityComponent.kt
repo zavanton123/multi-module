@@ -2,7 +2,6 @@ package ru.zavanton.chatbot.sales.di
 
 import android.content.Context
 import dagger.*
-import ru.zavanton.chatbot.app.di.ApplicationComponent
 import ru.zavanton.chatbot.app.di.ApplicationDependencies
 import ru.zavanton.chatbot.sales.business.ISalesInteractor
 import ru.zavanton.chatbot.sales.business.SalesInteractor
@@ -49,7 +48,7 @@ interface SalesActivityComponent {
 
     fun inject(salesActivity: SalesActivity)
 
-    fun salesFragmentComponent(): SalesFragmentComponent
+    fun salesFragmentComponentBuilder(): SalesFragmentComponent.Builder
 }
 
 @Module
@@ -71,9 +70,22 @@ interface SalesActivityModule {
     fun provideInteractor(impl: SalesInteractor): ISalesInteractor
 }
 
+@Qualifier
+@Retention
+annotation class SecretKey
+
 @SalesFragmentScope
 @Subcomponent
 interface SalesFragmentComponent {
+
+    @Subcomponent.Builder
+    interface Builder {
+
+        @BindsInstance
+        fun secretKey(@SecretKey secretKey: String): Builder
+
+        fun build(): SalesFragmentComponent
+    }
 
     fun inject(salesFragment: SalesFragment)
 }
