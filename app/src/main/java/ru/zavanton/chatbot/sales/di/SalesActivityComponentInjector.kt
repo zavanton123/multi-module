@@ -12,7 +12,7 @@ object SalesActivityComponentInjector {
             salesActivityComponent = DaggerSalesActivityComponent
                 .builder()
                 .salesActivityContext(context)
-                .applicationComponent(ApplicationComponentInjector.getComponent())
+                .applicationDependencies(ApplicationComponentInjector.getComponent())
                 .build()
         }
         return salesActivityComponent!!

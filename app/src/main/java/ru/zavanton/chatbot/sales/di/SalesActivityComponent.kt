@@ -3,6 +3,7 @@ package ru.zavanton.chatbot.sales.di
 import android.content.Context
 import dagger.*
 import ru.zavanton.chatbot.app.di.ApplicationComponent
+import ru.zavanton.chatbot.app.di.ApplicationDependencies
 import ru.zavanton.chatbot.sales.business.ISalesInteractor
 import ru.zavanton.chatbot.sales.business.SalesInteractor
 import ru.zavanton.chatbot.sales.ui.activity.SalesActivity
@@ -27,7 +28,7 @@ annotation class SalesActivityContext
 @SalesActivityScope
 @Component(
     dependencies = [
-        ApplicationComponent::class
+        ApplicationDependencies::class
     ],
     modules = [
         SalesActivityModule::class
@@ -41,7 +42,7 @@ interface SalesActivityComponent {
         @BindsInstance
         fun salesActivityContext(@SalesActivityContext context: Context): Builder
 
-        fun applicationComponent(applicationComponent: ApplicationComponent): Builder
+        fun applicationDependencies(applicationDependencies: ApplicationDependencies): Builder
 
         fun build(): SalesActivityComponent
     }

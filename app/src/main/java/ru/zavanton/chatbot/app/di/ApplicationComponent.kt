@@ -14,13 +14,21 @@ import javax.inject.Singleton
 @Retention
 annotation class ApplicationContext
 
+interface ApplicationDependencies {
+
+    @ApplicationContext
+    fun provideApplicationContext(): Context
+
+    fun provideTextUtils(): TextUtils
+}
+
 @Singleton
 @Component(
     modules = [
         UtilsModule::class
     ]
 )
-interface ApplicationComponent {
+interface ApplicationComponent : ApplicationDependencies {
 
     @Component.Builder
     interface Builder {
@@ -32,11 +40,6 @@ interface ApplicationComponent {
     }
 
     fun inject(mainActivity: MainActivity)
-
-    @ApplicationContext
-    fun provideApplicationContext(): Context
-
-    fun provideTextUtils(): TextUtils
 }
 
 
