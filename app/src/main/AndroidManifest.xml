@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".sales.ui.SalesActivity"></activity>
+        <activity android:name=".sales.ui.activity.SalesActivity"></activity>
         <activity android:name=".chatbot.ChatbotActivity" />
     </application>
 

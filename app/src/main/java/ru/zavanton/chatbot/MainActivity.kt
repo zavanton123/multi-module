@@ -7,7 +7,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import ru.zavanton.chatbot.app.di.ApplicationComponentInjector
 import ru.zavanton.chatbot.chatbot.ChatbotActivity
-import ru.zavanton.chatbot.sales.ui.SalesActivity
+import ru.zavanton.chatbot.sales.ui.activity.SalesActivity
 import ru.zavanton.chatbot.utils.TextUtils
 import javax.inject.Inject
 

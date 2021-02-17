@@ -1,4 +1,4 @@
-package ru.zavanton.chatbot.sales.ui
+package ru.zavanton.chatbot.sales.ui.activity
 
 import android.util.Log
 import ru.zavanton.chatbot.R

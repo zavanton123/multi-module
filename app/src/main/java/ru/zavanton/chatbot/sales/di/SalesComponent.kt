@@ -7,8 +7,8 @@ import dagger.Provides
 import ru.zavanton.chatbot.app.di.ApplicationComponent
 import ru.zavanton.chatbot.sales.business.ISalesInteractor
 import ru.zavanton.chatbot.sales.business.SalesInteractor
-import ru.zavanton.chatbot.sales.ui.SalesActivity
-import ru.zavanton.chatbot.sales.ui.SalesActivityPresenter
+import ru.zavanton.chatbot.sales.ui.activity.SalesActivity
+import ru.zavanton.chatbot.sales.ui.activity.SalesActivityPresenter
 import ru.zavanton.chatbot.utils.TextUtils
 import javax.inject.Scope
 

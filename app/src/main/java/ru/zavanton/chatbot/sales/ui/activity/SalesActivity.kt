@@ -1,4 +1,4 @@
-package ru.zavanton.chatbot.sales.ui
+package ru.zavanton.chatbot.sales.ui.activity
 
 import android.content.Context
 import android.content.Intent
@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import ru.zavanton.chatbot.R
 import ru.zavanton.chatbot.sales.di.SalesComponentInjector
+import ru.zavanton.chatbot.sales.ui.fragment.SalesFragment
 import javax.inject.Inject
 
 class SalesActivity : AppCompatActivity() {
@@ -27,5 +28,11 @@ class SalesActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.a_sales)
+
+        if (supportFragmentManager.findFragmentById(R.id.fragmentContainer) == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragmentContainer, SalesFragment.newInstance(), null)
+                .commit()
+        }
     }
 }
