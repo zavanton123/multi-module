@@ -6,6 +6,7 @@ import dagger.Component
 import dagger.Module
 import dagger.Provides
 import ru.zavanton.chatbot.MainActivity
+import ru.zavanton.chatbot.utils.InfoProcessor
 import ru.zavanton.chatbot.utils.TextUtils
 import javax.inject.Qualifier
 import javax.inject.Singleton
@@ -27,7 +28,8 @@ interface ApplicationDependencies {
 @Singleton
 @Component(
     modules = [
-        UtilsModule::class
+        UtilsModule::class,
+        InfoModule::class
     ]
 )
 interface ApplicationComponent : ApplicationDependencies {
@@ -56,3 +58,12 @@ class UtilsModule {
     }
 }
 
+@Module
+class InfoModule {
+
+    @Singleton
+    @Provides
+    fun providesInfoProcessor(): InfoProcessor {
+        return InfoProcessor()
+    }
+}
